@@ -210,4 +210,7 @@ ResizeWindow(deltaWidth, deltaHeight)
 ; Text editing remap
 ^w::Send ^{BackSpace}
 
+#+k::Send ^{PgDn}
+#+j::Send ^{PgUp}
+
 #IfWinActive 
