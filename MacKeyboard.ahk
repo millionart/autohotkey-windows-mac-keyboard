@@ -17,36 +17,6 @@
 SetTitleMatchMode 2
 SendMode Input
 
-
-; --------------------------------------------------------------
-; media/function keys all mapped to the right option key
-; --------------------------------------------------------------
-
-RAlt & F7::SendInput {Media_Prev}
-RAlt & F8::SendInput {Media_Play_Pause}
-RAlt & F9::SendInput {Media_Next}
-F10::SendInput {Volume_Mute}
-F11::SendInput {Volume_Down}
-F12::SendInput {Volume_Up}
-
-; swap left command/windows key with left alt
-;LWin::LAlt
-;LAlt::LWin ; add a semicolon in front of this line if you want to disable the windows key
-
-; Eject Key
-;F20::SendInput {Insert} ; F20 doesn't show up on AHK anymore, see #3
-
-; F13-15, standard windows mapping
-F13::SendInput {PrintScreen}
-F14::SendInput {ScrollLock}
-F15::SendInput {Pause}
-
-;F16-19 custom app launchers, see http://www.autohotkey.com/docs/Tutorial.htm for usage info
-F16::Run http://twitter.com
-F17::Run http://tumblr.com
-F18::Run http://www.reddit.com
-F19::Run https://facebook.com
-
 ; --------------------------------------------------------------
 ; OS X system shortcuts
 ; --------------------------------------------------------------
@@ -90,9 +60,42 @@ F19::Run https://facebook.com
 ; Remap Windows + Tab to Alt + Tab.
 Lwin & Tab::AltTab
 
-; minimize windows
-#m::WinMinimize,a
+; Remap Text Editing
+#Left::Send {Home}
+#Right::Send {End}
+#Up::Send ^{Home}
+#Down::Send ^{End}
 
+
+; --------------------------------------------------------------
+; Window Control
+; --------------------------------------------------------------
+
+#m::WinMinimize,a ; minimize windows
+!+m::WinMaximize,a
+!+l::Send #{Right}
+!+h::Send #{Left}
+
+!+c::CenterActiveWindow()
+
+!#+h::MoveWindow(-10, 0)
+!#+l::MoveWindow(10, 0)
+!#+j::MoveWindow(0, 10)
+!#+k::MoveWindow(0, -10)
+
+CenterActiveWindow()
+{
+  WinGetTitle, windowName, A
+  WinGetPos,,, Width, Height, %windowName%
+
+  WinMove, %windowName%, , A_ScreenWidth / 2 - (Width / 2), (A_ScreenHeight/2)-(Height/2)
+}
+
+MoveWindow(moveX, moveY)
+{
+  WinGetPos, X, Y, , , A
+  WinMove, A, , X + moveX, Y + moveY
+}
 
 ; --------------------------------------------------------------
 ; OS X keyboard mappings for special chars
@@ -146,31 +149,31 @@ Lwin & Tab::AltTab
 ; Map Alt + 3 to #
 !3::SendInput {#}
 
-
-
-; --------------------------------------------------------------
-; Custom mappings for special chars
-; --------------------------------------------------------------
-
-;#ö::SendInput {[} 
-;#ä::SendInput {]} 
-
-;^ö::SendInput {{} 
-;^ä::SendInput {}} 
-
-
 ; --------------------------------------------------------------
 ; Application specific
 ; --------------------------------------------------------------
 
-; Google Chrome
-#IfWinActive, ahk_class Chrome_WidgetWin_1
+; Opera
+#IfWinActive, ahk_exe opera.exe
 
 ; Show Web Developer Tools with cmd + alt + i
-#!i::Send {F12}
+#!i::Send ^+i
 
 ; Show source code with cmd + alt + u
 #!u::Send ^u
 
-#IfWinActive
+; next/previous remapping
+^n::Send {Down}
+^p::Send {Up}
 
+; new window remap
+#n::Send ^n
+#+n::Send ^+n
+
+#w::Send ^w
+#t::Send ^t
+
+; Text editing remap
+^w::Send ^{BackSpace}
+
+#IfWinActive 
