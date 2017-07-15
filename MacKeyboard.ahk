@@ -83,6 +83,11 @@ Lwin & Tab::AltTab
 !#+j::MoveWindow(0, 10)
 !#+k::MoveWindow(0, -10)
 
+^!#+h::ResizeWindow(-10, 0)
+^!#+l::ResizeWindow(10, 0)
+^!#+j::ResizeWindow(0, 10)
+^!#+k::ResizeWindow(0, -10)
+
 CenterActiveWindow()
 {
   WinGetTitle, windowName, A
@@ -95,6 +100,12 @@ MoveWindow(moveX, moveY)
 {
   WinGetPos, X, Y, , , A
   WinMove, A, , X + moveX, Y + moveY
+}
+
+ResizeWindow(deltaWidth, deltaHeight)
+{
+  WinGetPos, , , W, H, A
+  WinMove, A, , , , W + deltaWidth, H + deltaHeight
 }
 
 ; --------------------------------------------------------------
