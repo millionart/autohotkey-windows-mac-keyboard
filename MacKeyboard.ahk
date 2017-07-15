@@ -84,6 +84,7 @@ Lwin & Tab::AltTab
 
 #m::WinMinimize,a ; minimize windows
 !+m::WinMaximize,a
+!+n::WinRestore,a
 !+l::Send #{Right}
 !+h::Send #{Left}
 
