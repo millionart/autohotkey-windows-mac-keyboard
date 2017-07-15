@@ -60,12 +60,23 @@ SendMode Input
 ; Remap Windows + Tab to Alt + Tab.
 Lwin & Tab::AltTab
 
-; Remap Text Editing
+; --------------------------------------------------------------
+; Text Editing Shortcut
+; --------------------------------------------------------------
+
 #Left::Send {Home}
 #Right::Send {End}
 #Up::Send ^{Home}
 #Down::Send ^{End}
 
++#Left::Send ^+{Home}
++#Right::Send ^+{End}
+
+!Left::Send ^{Left}
+!Right::Send ^{Right}
+
+!+Left::Send ^+{Left}
+!+Right::Send ^+{Right}
 
 ; --------------------------------------------------------------
 ; Window Control
