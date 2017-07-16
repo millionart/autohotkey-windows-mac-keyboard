@@ -78,6 +78,8 @@ Lwin & Tab::AltTab
 !+Left::Send ^+{Left}
 !+Right::Send ^+{Right}
 
+!BackSpace::Send ^{BackSpace}
+
 ; --------------------------------------------------------------
 ; Window Control
 ; --------------------------------------------------------------
@@ -85,6 +87,7 @@ Lwin & Tab::AltTab
 #m::WinMinimize,a ; minimize windows
 !+m::WinMaximize,a
 !+n::WinRestore,a
+
 !+l::Send #{Right}
 !+h::Send #{Left}
 
