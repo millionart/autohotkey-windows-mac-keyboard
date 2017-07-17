@@ -240,5 +240,6 @@ ResizeWindow(deltaWidth, deltaHeight)
 
 ^-::Send !{Left}
 ^+::Send !{Right}
+^=::Send !{Right}
 
 #IfWinActive 
