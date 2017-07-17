@@ -80,6 +80,11 @@ Lwin & Tab::AltTab
 
 !BackSpace::Send ^{BackSpace}
 
+#BackSpace::
+  Send +{Home}
+  Send {BackSpace}
+return
+
 ; --------------------------------------------------------------
 ; Window Control
 ; --------------------------------------------------------------
