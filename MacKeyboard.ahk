@@ -217,3 +217,10 @@ ResizeWindow(deltaWidth, deltaHeight)
 #+j::Send ^{PgUp}
 
 #IfWinActive 
+
+#IfWinActive, ahk_exe Code.exe
+
+^-::Send !{Left}
+^+::Send !{Right}
+
+#IfWinActive 
