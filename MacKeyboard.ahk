@@ -1,4 +1,4 @@
-;-----------------------------------------
+﻿;-----------------------------------------
 ; Mac keyboard to Windows Key Mappings
 ;=========================================
 
@@ -12,17 +12,61 @@
 ;
 ; Debug action snippet: MsgBox You pressed Control-A while Notepad is active.
 
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+SetBatchLines -1
+ListLines Off
+SetKeyDelay,-1,-1
 #InstallKeybdHook
 #SingleInstance force
 SetTitleMatchMode 2
 SendMode Input
+
+if !A_IsAdmin {
+    Run *RunAs "%A_AhkPath%" "%A_ScriptFullPath%"
+    ExitApp
+}
+
+GroupAdd, Game, ahk_exe Overwatch.exe
+
+#IfWinActive, ahk_group Game
+	LAlt::return
+#IfWinActive
+
+#IfWinActive, ahk_class MozillaWindowClass
+	f1::^t
+	f4::^w
+
+	#z::^+t
+#IfWinActive
+
+#IfWinNotActive, ahk_class Photoshop
+	#BackSpace::Send, {Del}
+#IfWinNotActive
+
+#IfWinActive, ahk_class Photoshop
+	#BackSpace::!BackSpace
+#IfWinActive
+
+*LAlt::
+	Send, {LWinDown}
+	KeyWait, LAlt
+	Send, {LWinUp}
+Return
+
+*LWin::
+	Send, {LAlt Down}
+	KeyWait, LWin
+	Send, {LAlt Up}
+Return
 
 ; --------------------------------------------------------------
 ; OS X system shortcuts
 ; --------------------------------------------------------------
 
 ; Make Ctrl + S work with cmd (windows) key
-#s::^s
+LWin & s::
+	Send, ^s
+Return
 
 ; Selecting
 #a::^a
@@ -80,10 +124,6 @@ Lwin & Tab::AltTab
 
 !BackSpace::Send ^{BackSpace}
 
-#BackSpace::
-  Send +{Home}
-  Send {BackSpace}
-return
 
 ; --------------------------------------------------------------
 ; Window Control
@@ -237,6 +277,10 @@ ResizeWindow(deltaWidth, deltaHeight)
 #IfWinActive 
 
 #IfWinActive, ahk_exe Code.exe
+
+^WheelUp::^=
+^WheelDown::^-
+#+f::!+f
 
 ^-::Send !{Left}
 ^+::Send !{Right}
